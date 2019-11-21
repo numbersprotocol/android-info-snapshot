@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':infosnapshot'
 rootProject.name='Info Snapshot'
