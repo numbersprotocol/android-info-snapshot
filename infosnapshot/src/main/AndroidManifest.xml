@@ -1,1 +1,5 @@
-<manifest package="io.numbers.infosnapshot" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.numbers.infosnapshot">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+</manifest>

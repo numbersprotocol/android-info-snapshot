@@ -2,4 +2,5 @@
     <string name="app_name">Info Snapshot</string>
     <string name="snap">Snap</string>
     <string name="cancel">Cancel</string>
+    <string name="debug">Debug</string>
 </resources>
