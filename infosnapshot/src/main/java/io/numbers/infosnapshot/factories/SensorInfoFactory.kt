@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 
 object SensorInfoFactory {
 
-    lateinit var sensorManager: SensorManager
+    private lateinit var sensorManager: SensorManager
 
     suspend fun newSensorInfo(context: Context, duration: Long) = coroutineScope {
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager

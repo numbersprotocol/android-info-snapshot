@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         snapButton.setOnClickListener {
             val snapshotBuilder = InfoSnapshotBuilder(this).apply {
-                duration = 100
+                duration = 2000
             }
             job = launch {
                 try {
@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         debugButton.setOnClickListener {
             launch {
-                LocationInfoFactory.newLocationInfo(this@MainActivity, 5000)
+                val locationInfo = LocationInfoFactory.newLocationInfo(this@MainActivity, 10000)
+                Log.i(TAG, "$locationInfo")
             }
         }
     }
