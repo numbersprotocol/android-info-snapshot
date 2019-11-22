@@ -1,11 +1,16 @@
 package io.numbers.infosnapshot
 
-import io.numbers.infosnapshot.info.Device
+import android.content.Context
+import io.numbers.infosnapshot.factories.SensorInfoFactory
 import io.numbers.infosnapshot.model.Snapshot
+import io.numbers.infosnapshot.model.info.DeviceInfo
 
-class InfoSnapshotBuilder {
+class InfoSnapshotBuilder(private val context: Context) {
 
-    fun snap() = Snapshot(
-        Device()
+    var duration: Long = 100
+
+    suspend fun snap() = Snapshot(
+        DeviceInfo(),
+        SensorInfoFactory.newSensorInfo(context, duration)
     )
 }

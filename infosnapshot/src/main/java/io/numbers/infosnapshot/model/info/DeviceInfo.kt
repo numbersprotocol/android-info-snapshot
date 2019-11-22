@@ -1,8 +1,8 @@
-package io.numbers.infosnapshot.info
+package io.numbers.infosnapshot.model.info
 
 import android.os.Build
 
-data class Device(
+data class DeviceInfo(
     val board: String = Build.BOARD,
     val bootloader: String = Build.BOOTLOADER,
     val brand: String = Build.BRAND,

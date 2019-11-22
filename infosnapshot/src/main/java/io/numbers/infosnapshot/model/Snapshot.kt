@@ -1,5 +1,9 @@
 package io.numbers.infosnapshot.model
 
-import io.numbers.infosnapshot.info.Device
+import io.numbers.infosnapshot.model.info.DeviceInfo
+import io.numbers.infosnapshot.model.info.SensorInfo
 
-data class Snapshot(val device: Device)
+data class Snapshot(
+    val deviceInfo: DeviceInfo,
+    val sensorInfo: SensorInfo
+)
