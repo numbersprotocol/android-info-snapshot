@@ -20,83 +20,83 @@ object SensorInfoFactory {
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         val accelerometerData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_ACCELEROMETER, duration)?.simply()
+            recordSensor(Sensor.TYPE_ACCELEROMETER, duration)?.average()
         }
         val accelerometerUncalibratedData = async(Dispatchers.Default) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                recordSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED, duration)?.simply()
+                recordSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED, duration)?.average()
             } else null
         }
         val ambientTemperatureData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_AMBIENT_TEMPERATURE, duration)?.simply()
+            recordSensor(Sensor.TYPE_AMBIENT_TEMPERATURE, duration)?.average()
         }
         val gameRotationVectorData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GAME_ROTATION_VECTOR, duration)?.simply()
+            recordSensor(Sensor.TYPE_GAME_ROTATION_VECTOR, duration)?.average()
         }
         val geomagneticRotationVectorData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR, duration)?.simply()
+            recordSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR, duration)?.average()
         }
         val gravityData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GRAVITY, duration)?.simply()
+            recordSensor(Sensor.TYPE_GRAVITY, duration)?.average()
         }
         val gyroscopeData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GYROSCOPE, duration)?.simply()
+            recordSensor(Sensor.TYPE_GYROSCOPE, duration)?.average()
         }
         val gyroscopeUncalibratedData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED, duration)?.simply()
+            recordSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED, duration)?.average()
         }
         val heartBeatData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_HEART_BEAT, duration)?.simply()
+            recordSensor(Sensor.TYPE_HEART_BEAT, duration)?.average()
         }
         val heartRateData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_HEART_RATE, duration)?.simply()
+            recordSensor(Sensor.TYPE_HEART_RATE, duration)?.average()
         }
         val lightData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_LIGHT, duration)?.simply()
+            recordSensor(Sensor.TYPE_LIGHT, duration)?.average()
         }
         val linearAccelerationData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_LINEAR_ACCELERATION, duration)?.simply()
+            recordSensor(Sensor.TYPE_LINEAR_ACCELERATION, duration)?.average()
         }
         val lowLatencyOffbodyDetectData = async(Dispatchers.Default) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                recordSensor(Sensor.TYPE_LOW_LATENCY_OFFBODY_DETECT, duration)?.simply()
+                recordSensor(Sensor.TYPE_LOW_LATENCY_OFFBODY_DETECT, duration)?.average()
             } else null
         }
         val magneticFieldData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_MAGNETIC_FIELD, duration)?.simply()
+            recordSensor(Sensor.TYPE_MAGNETIC_FIELD, duration)?.average()
         }
         val magneticFieldUncalibratedData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED, duration)?.simply()
+            recordSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED, duration)?.average()
         }
         val motionDetectData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_MOTION_DETECT, duration)?.simply()
+            recordSensor(Sensor.TYPE_MOTION_DETECT, duration)?.average()
         }
         val pose6DofData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_POSE_6DOF, duration)?.simply()
+            recordSensor(Sensor.TYPE_POSE_6DOF, duration)?.average()
         }
         val pressureData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_PRESSURE, duration)?.simply()
+            recordSensor(Sensor.TYPE_PRESSURE, duration)?.average()
         }
         val proximityData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_PROXIMITY, duration)?.simply()
+            recordSensor(Sensor.TYPE_PROXIMITY, duration)?.average()
         }
         val relativeHumidityData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_RELATIVE_HUMIDITY, duration)?.simply()
+            recordSensor(Sensor.TYPE_RELATIVE_HUMIDITY, duration)?.average()
         }
         val rotationVectorData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_ROTATION_VECTOR, duration)?.simply()
+            recordSensor(Sensor.TYPE_ROTATION_VECTOR, duration)?.average()
         }
         val significantMotionData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_SIGNIFICANT_MOTION, duration)?.simply()
+            recordSensor(Sensor.TYPE_SIGNIFICANT_MOTION, duration)?.average()
         }
         val stationaryDetectData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_STATIONARY_DETECT, duration)?.simply()
+            recordSensor(Sensor.TYPE_STATIONARY_DETECT, duration)?.average()
         }
         val stepCounter = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_STEP_COUNTER, duration)?.simply()
+            recordSensor(Sensor.TYPE_STEP_COUNTER, duration)?.average()
         }
         val stepDetector = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_STEP_DETECTOR, duration)?.simply()
+            recordSensor(Sensor.TYPE_STEP_DETECTOR, duration)?.average()
         }
 
         return@coroutineScope SensorInfo(
@@ -185,7 +185,7 @@ object SensorInfoFactory {
         val values: MutableList<FloatArray>
     ) {
 
-        fun simply(): SensorData? {
+        fun average(): SensorData? {
             return values.map { it.size }.max()?.let { maxValueSize ->
                 val sumOfValue = FloatArray(maxValueSize)
 
