@@ -135,12 +135,20 @@ object SensorInfoFactory {
             Log.d(TAG, "${it.name} reporting mode is: ${it.reportingMode}")
             if (it.reportingMode == Sensor.REPORTING_MODE_ONE_SHOT) {
                 val listener = createTriggerEventListener(values)
-                sensorManager.requestTriggerSensor(listener, it)
+                try {
+                    sensorManager.requestTriggerSensor(listener, it)
+                    delay(duration)
+                } finally {
+                    sensorManager.cancelTriggerSensor(listener, it)
+                }
             } else {
                 val listener = createSensorEventListener(accuracies, values)
-                sensorManager.registerListener(listener, it, SensorManager.SENSOR_DELAY_FASTEST)
-                delay(duration)
-                sensorManager.unregisterListener(listener)
+                try {
+                    sensorManager.registerListener(listener, it, SensorManager.SENSOR_DELAY_FASTEST)
+                    delay(duration)
+                } finally {
+                    sensorManager.unregisterListener(listener)
+                }
             }
             SensorHistory(accuracies, values)
         } ?: let {

@@ -7,10 +7,16 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/snap"
+        android:id="@+id/snapButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/snap" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel" />
 
     <ProgressBar
         android:layout_width="wrap_content"
