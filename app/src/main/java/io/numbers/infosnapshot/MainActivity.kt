@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
 import io.numbers.infosnapshot.factories.LocationInfoFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
@@ -28,11 +27,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         snapButton.setOnClickListener {
             val snapshotBuilder = InfoSnapshotBuilder(this).apply {
-                duration = 2000
+                duration = 1000
             }
             job = launch {
                 try {
-                    Log.i(TAG, Gson().toJson(snapshotBuilder.snap()))
+                    val snapshot = snapshotBuilder.snap()
+                    Log.i(TAG, snapshot.toJson())
+                    Log.i(TAG, "$snapshot")
                 } catch (e: Exception) {
                     Log.e(TAG, Log.getStackTraceString(e))
                 }

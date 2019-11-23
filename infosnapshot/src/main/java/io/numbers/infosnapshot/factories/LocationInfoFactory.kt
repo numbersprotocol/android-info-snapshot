@@ -5,6 +5,8 @@ import android.util.Log
 import com.google.android.gms.location.*
 import io.numbers.infosnapshot.model.info.LocationData
 import io.numbers.infosnapshot.model.info.LocationInfo
+import io.numbers.infosnapshot.utils.NullReason
+import io.numbers.infosnapshot.utils.NullableWithReason
 import io.numbers.infosnapshot.utils.TAG
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -15,9 +17,11 @@ object LocationInfoFactory {
         val locationRequest = createLocationRequest(duration)
         val client = LocationServices.getFusedLocationProviderClient(context)
 
-        var lastKnownLocationData: LocationData? = null
+        var lastKnownLocationData =
+            NullableWithReason<LocationData>(NullReason.SNAP_DURATION_TOO_SHORT)
+
         client.lastLocation.addOnSuccessListener {
-            lastKnownLocationData = LocationData.fromLocation(it)
+            lastKnownLocationData = NullableWithReason(LocationData.fromLocation(it))
         }
 
         val currentLocations = mutableListOf<LocationData>()
@@ -28,9 +32,14 @@ object LocationInfoFactory {
         } finally {
             client.removeLocationUpdates(locationCallback)
         }
+
+        val lastCurrentLocation: NullableWithReason<LocationData> =
+            if (currentLocations.isEmpty()) NullableWithReason(NullReason.SNAP_DURATION_TOO_SHORT)
+            else NullableWithReason(currentLocations.last())
+
         return@coroutineScope LocationInfo(
             lastKnownLocationData,
-            currentLocations.lastOrNull()
+            lastCurrentLocation
         )
     }
 

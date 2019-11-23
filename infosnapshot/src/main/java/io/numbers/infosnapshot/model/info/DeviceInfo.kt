@@ -1,7 +1,9 @@
 package io.numbers.infosnapshot.model.info
 
 import android.os.Build
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class DeviceInfo(
     val board: String = Build.BOARD,
     val bootloader: String = Build.BOOTLOADER,

@@ -6,6 +6,8 @@ import android.os.Build
 import android.util.Log
 import io.numbers.infosnapshot.model.info.SensorData
 import io.numbers.infosnapshot.model.info.SensorInfo
+import io.numbers.infosnapshot.utils.NullReason
+import io.numbers.infosnapshot.utils.NullableWithReason
 import io.numbers.infosnapshot.utils.TAG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -20,83 +22,91 @@ object SensorInfoFactory {
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         val accelerometerData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_ACCELEROMETER, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_ACCELEROMETER, duration))
         }
         val accelerometerUncalibratedData = async(Dispatchers.Default) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                recordSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED, duration)?.average()
-            } else null
+                propagateDataOrNullReason(
+                    recordSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED, duration)
+                )
+            } else NullableWithReason(NullReason.ANDROID_SDK_TOO_OLD)
         }
         val ambientTemperatureData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_AMBIENT_TEMPERATURE, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_AMBIENT_TEMPERATURE, duration))
         }
         val gameRotationVectorData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GAME_ROTATION_VECTOR, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_GAME_ROTATION_VECTOR, duration))
         }
         val geomagneticRotationVectorData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR, duration)?.average()
+            propagateDataOrNullReason(
+                recordSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR, duration)
+            )
         }
         val gravityData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GRAVITY, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_GRAVITY, duration))
         }
         val gyroscopeData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GYROSCOPE, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_GYROSCOPE, duration))
         }
         val gyroscopeUncalibratedData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED, duration))
         }
         val heartBeatData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_HEART_BEAT, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_HEART_BEAT, duration))
         }
         val heartRateData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_HEART_RATE, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_HEART_RATE, duration))
         }
         val lightData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_LIGHT, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_LIGHT, duration))
         }
         val linearAccelerationData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_LINEAR_ACCELERATION, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_LINEAR_ACCELERATION, duration))
         }
         val lowLatencyOffbodyDetectData = async(Dispatchers.Default) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                recordSensor(Sensor.TYPE_LOW_LATENCY_OFFBODY_DETECT, duration)?.average()
-            } else null
+                propagateDataOrNullReason(
+                    recordSensor(Sensor.TYPE_LOW_LATENCY_OFFBODY_DETECT, duration)
+                )
+            } else NullableWithReason(NullReason.ANDROID_SDK_TOO_OLD)
         }
         val magneticFieldData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_MAGNETIC_FIELD, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_MAGNETIC_FIELD, duration))
         }
         val magneticFieldUncalibratedData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED, duration)?.average()
+            propagateDataOrNullReason(
+                recordSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED, duration)
+            )
         }
         val motionDetectData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_MOTION_DETECT, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_MOTION_DETECT, duration))
         }
         val pose6DofData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_POSE_6DOF, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_POSE_6DOF, duration))
         }
         val pressureData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_PRESSURE, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_PRESSURE, duration))
         }
         val proximityData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_PROXIMITY, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_PROXIMITY, duration))
         }
         val relativeHumidityData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_RELATIVE_HUMIDITY, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_RELATIVE_HUMIDITY, duration))
         }
         val rotationVectorData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_ROTATION_VECTOR, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_ROTATION_VECTOR, duration))
         }
         val significantMotionData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_SIGNIFICANT_MOTION, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_SIGNIFICANT_MOTION, duration))
         }
         val stationaryDetectData = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_STATIONARY_DETECT, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_STATIONARY_DETECT, duration))
         }
         val stepCounter = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_STEP_COUNTER, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_STEP_COUNTER, duration))
         }
         val stepDetector = async(Dispatchers.Default) {
-            recordSensor(Sensor.TYPE_STEP_DETECTOR, duration)?.average()
+            propagateDataOrNullReason(recordSensor(Sensor.TYPE_STEP_DETECTOR, duration))
         }
 
         return@coroutineScope SensorInfo(
@@ -128,7 +138,18 @@ object SensorInfoFactory {
         )
     }
 
-    private suspend fun recordSensor(sensorType: Int, duration: Long): SensorHistory? {
+    private fun propagateDataOrNullReason(history: NullableWithReason<SensorHistory>) =
+        if (history.nullReason != null) NullableWithReason(history.nullReason)
+        else {
+            val average = history.value!!.average()
+            if (average.nullReason != null) NullableWithReason(average.nullReason)
+            else NullableWithReason(average.value!!)
+        }
+
+    private suspend fun recordSensor(
+        sensorType: Int,
+        duration: Long
+    ): NullableWithReason<SensorHistory> {
         val accuracies = mutableListOf<Int>()
         val values = mutableListOf<FloatArray>()
         return sensorManager.getDefaultSensor(sensorType)?.let {
@@ -150,11 +171,8 @@ object SensorInfoFactory {
                     sensorManager.unregisterListener(listener)
                 }
             }
-            SensorHistory(accuracies, values)
-        } ?: let {
-            Log.d(TAG, "Device does not have sensor type: $sensorType")
-            null
-        }
+            NullableWithReason(SensorHistory(accuracies, values))
+        } ?: NullableWithReason(NullReason.UNSUPPORTED)
     }
 
     private fun createSensorEventListener(
@@ -185,7 +203,7 @@ object SensorInfoFactory {
         val values: MutableList<FloatArray>
     ) {
 
-        fun average(): SensorData? {
+        fun average(): NullableWithReason<SensorData> {
             return values.map { it.size }.max()?.let { maxValueSize ->
                 val sumOfValue = FloatArray(maxValueSize)
 
@@ -195,14 +213,15 @@ object SensorInfoFactory {
                     }
                 }
 
-                SensorData(
-                    accuracies.average(),
+                val averageAccuracy: NullableWithReason<Double> =
+                    if (accuracies.isEmpty()) NullableWithReason(NullReason.NO_CHANGE_DURING_SNAP)
+                    else NullableWithReason(accuracies.average())
+
+                NullableWithReason(SensorData(
+                    averageAccuracy,
                     sumOfValue.map { it / values.size }
-                )
-            } ?: let {
-                Log.d(TAG, "Cannot simply with empty values.")
-                null
-            }
+                ))
+            } ?: NullableWithReason(NullReason.NO_CHANGE_DURING_SNAP)
         }
     }
 }

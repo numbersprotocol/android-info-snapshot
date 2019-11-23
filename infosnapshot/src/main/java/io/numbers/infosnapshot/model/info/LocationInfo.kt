@@ -2,24 +2,29 @@ package io.numbers.infosnapshot.model.info
 
 import android.location.Location
 import android.os.Build
+import com.squareup.moshi.JsonClass
+import io.numbers.infosnapshot.utils.NullReason
+import io.numbers.infosnapshot.utils.NullableWithReason
 
+@JsonClass(generateAdapter = true)
 data class LocationInfo(
-    val lastKnown: LocationData?,
-    val current: LocationData?
+    val lastKnown: NullableWithReason<LocationData>,
+    val current: NullableWithReason<LocationData>
 )
 
+@JsonClass(generateAdapter = true)
 data class LocationData(
     val accuracy: Float,
     val altitude: Double,
     val bearing: Float,
-    val bearingAccuracyDegrees: Float?,
+    val bearingAccuracyDegrees: NullableWithReason<Float>,
     val latitude: Double,
     val longitude: Double,
     val provider: String,
     val speed: Float,
-    val speedAccuracyMetersPerSecond: Float?,
+    val speedAccuracyMetersPerSecond: NullableWithReason<Float>,
     val time: Long,
-    val verticalAccuracyMeters: Float?,
+    val verticalAccuracyMeters: NullableWithReason<Float>,
     val isFromMockProvider: Boolean
 ) {
 
@@ -30,14 +35,14 @@ data class LocationData(
                     location.accuracy,
                     location.altitude,
                     location.bearing,
-                    location.bearingAccuracyDegrees,
+                    NullableWithReason(location.bearingAccuracyDegrees),
                     location.latitude,
                     location.longitude,
                     location.provider,
                     location.speed,
-                    location.speedAccuracyMetersPerSecond,
+                    NullableWithReason(location.speedAccuracyMetersPerSecond),
                     location.time,
-                    location.verticalAccuracyMeters,
+                    NullableWithReason(location.verticalAccuracyMeters),
                     location.isFromMockProvider
                 )
             } else {
@@ -45,14 +50,14 @@ data class LocationData(
                     location.accuracy,
                     location.altitude,
                     location.bearing,
-                    null,
+                    NullableWithReason(NullReason.ANDROID_SDK_TOO_OLD),
                     location.latitude,
                     location.longitude,
                     location.provider,
                     location.speed,
-                    null,
+                    NullableWithReason(NullReason.ANDROID_SDK_TOO_OLD),
                     location.time,
-                    null,
+                    NullableWithReason(NullReason.ANDROID_SDK_TOO_OLD),
                     location.isFromMockProvider
                 )
             }
