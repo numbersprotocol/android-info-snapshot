@@ -214,14 +214,14 @@ object SensorInfoFactory {
                 }
 
                 val averageAccuracy: NullableWithReason<Double> =
-                    if (accuracies.isEmpty()) NullableWithReason(NullReason.NO_CHANGE_DURING_SNAP)
+                    if (accuracies.isEmpty()) NullableWithReason(NullReason.NO_UPDATE_RECEIVED_DURING_SNAP)
                     else NullableWithReason(accuracies.average())
 
                 NullableWithReason(SensorData(
                     averageAccuracy,
                     sumOfValue.map { it / values.size }
                 ))
-            } ?: NullableWithReason(NullReason.NO_CHANGE_DURING_SNAP)
+            } ?: NullableWithReason(NullReason.NO_UPDATE_RECEIVED_DURING_SNAP)
         }
     }
 }

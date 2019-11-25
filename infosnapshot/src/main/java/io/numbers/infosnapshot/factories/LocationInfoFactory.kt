@@ -1,6 +1,7 @@
 package io.numbers.infosnapshot.factories
 
 import android.content.Context
+import android.location.Location
 import android.util.Log
 import com.google.android.gms.location.*
 import io.numbers.infosnapshot.model.info.LocationData
@@ -14,17 +15,21 @@ import kotlinx.coroutines.delay
 object LocationInfoFactory {
 
     suspend fun newLocationInfo(context: Context, duration: Long) = coroutineScope {
-        // TODO: return null with reason when location settings correct
         // TODO: return null with reason when no permission
 
         val client = LocationServices.getFusedLocationProviderClient(context)
         val locationRequest = createLocationRequest(duration)
 
         var lastKnownLocationData =
-            NullableWithReason<LocationData>(NullReason.SNAP_DURATION_TOO_SHORT)
+            NullableWithReason<LocationData>(NullReason.NO_UPDATE_RECEIVED_DURING_SNAP)
 
-        client.lastLocation.addOnSuccessListener {
-            lastKnownLocationData = NullableWithReason(LocationData.fromLocation(context, it))
+        client.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location == null) Log.e(TAG, "last location is null.")
+            else {
+                Log.d(TAG, "Received last location: $location")
+                lastKnownLocationData =
+                    NullableWithReason(LocationData.fromLocation(context, location))
+            }
         }
 
         val currentLocations = mutableListOf<LocationData>()
@@ -37,7 +42,7 @@ object LocationInfoFactory {
         }
 
         val lastCurrentLocation: NullableWithReason<LocationData> =
-            if (currentLocations.isEmpty()) NullableWithReason(NullReason.SNAP_DURATION_TOO_SHORT)
+            if (currentLocations.isEmpty()) NullableWithReason(NullReason.NO_UPDATE_RECEIVED_DURING_SNAP)
             else NullableWithReason(currentLocations.last())
 
         return@coroutineScope LocationInfo(
@@ -54,13 +59,14 @@ object LocationInfoFactory {
             override fun onLocationResult(result: LocationResult?) {
                 super.onLocationResult(result)
                 result?.apply {
+                    Log.d(TAG, "Received current location: $lastLocation")
                     locationHolder.add(LocationData.fromLocation(context, lastLocation))
                 } ?: Log.e(TAG, "Null result from location callback.")
             }
 
             override fun onLocationAvailability(availability: LocationAvailability) {
                 super.onLocationAvailability(availability)
-                Log.i(TAG, "Location availability: ${availability.isLocationAvailable}")
+                Log.d(TAG, "Location availability: ${availability.isLocationAvailable}")
             }
         }
 
