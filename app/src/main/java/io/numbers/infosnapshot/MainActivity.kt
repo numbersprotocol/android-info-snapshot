@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         snapButton.setOnClickListener {
             val snapshotBuilder = InfoSnapshotBuilder(this).apply {
-                duration = 1000
+                duration = 2000
             }
             job = launch {
                 try {
