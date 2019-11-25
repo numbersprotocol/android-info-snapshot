@@ -15,8 +15,6 @@ import kotlinx.coroutines.delay
 object LocationInfoFactory {
 
     suspend fun newLocationInfo(context: Context, duration: Long) = coroutineScope {
-        // TODO: return null with reason when no permission
-
         val client = LocationServices.getFusedLocationProviderClient(context)
         val locationRequest = createLocationRequest(duration)
 
@@ -24,9 +22,8 @@ object LocationInfoFactory {
             NullableWithReason<LocationData>(NullReason.NO_UPDATE_RECEIVED_DURING_SNAP)
 
         client.lastLocation.addOnSuccessListener { location: Location? ->
-            if (location == null) Log.e(TAG, "last location is null.")
-            else {
-                Log.d(TAG, "Received last location: $location")
+            Log.d(TAG, "Received last location: $location")
+            if (location != null) {
                 lastKnownLocationData =
                     NullableWithReason(LocationData.fromLocation(context, location))
             }
