@@ -25,6 +25,8 @@ launch {
 
 > Remember to give permissions (e.g. `Manifest.permission.ACCESS_FINE_LOCATION`) before calling `snap()` to avoid security exception.
 
+You can see an Android example project [here](./app/src/main/java/io/numbers/infosnapshot/MainActivity.kt).
+
 ## Installation
 
 Add the JitPack repository to your build file. Add it in your root build.gradle at the end of repositories.
@@ -51,76 +53,81 @@ dependencies {
 ``` json
 {
   "deviceInfo": {
-    "board": "sdm845",
-    "bootloader": "1.0.0.0000",
-    "brand": "htc",
-    "device": "htc_exodugl",
-    "display": "OPR1.170623.032 release-keys",
-    "fingerprint": "htc/exodugl_00709/htc_exodugl:8.0.0/OPR1.170623.032/1091479.2:user/release-keys",
-    "hardware": "htc_exo",
-    "host": "ABM124",
-    "id": "OPR1.170623.032",
-    "manufacturer": "HTC",
-    "model": "EXODUS 1",
-    "product": "exodugl_00709",
+    "board": "unknown",
+    "bootloader": "unknown",
+    "brand": "google",
+    "device": "generic_x86",
+    "display": "NYC",
+    "fingerprint": "google\/sdk_google_phone_x86\/generic_x86:7.0\/NYC\/4409132:user\/release-keys",
+    "hardware": "ranchu",
+    "host": "wphr6.hot.corp.google.com",
+    "id": "NYC",
+    "manufacturer": "Google",
+    "model": "Android SDK built for x86",
+    "product": "sdk_google_phone_x86",
     "supportedAbis": [
-      "arm64-v8a",
-      "armeabi-v7a",
-      "armeabi"
+      "x86"
     ],
     "tags": "release-keys",
-    "buildTime": 1568020752000,
+    "buildTime": 1508534163000,
     "type": "user",
-    "user": "buildteam"
+    "user": "android-build"
+  },
+  "localeInfo": {
+    "country": "United States",
+    "variant": "",
+    "language": "English",
+    "script": "",
+    "name": "English (United States)"
   },
   "locationInfo": {
     "lastKnown": {
       "value": {
-        "accuracy": 24.059,
-        "altitude": 42.79999923706055,
-        "bearing": 0.0,
+        "accuracy": 20,
+        "altitude": 0,
+        "bearing": 90,
         "bearingAccuracyDegrees": {
-          "value": 0.0
+          "nullReason": "ANDROID_SDK_TOO_OLD"
         },
-        "latitude": 25.0723367,
-        "longitude": 121.6090836,
+        "latitude": 25.04718,
+        "longitude": 121.5609533,
         "provider": "fused",
-        "speed": 0.0,
+        "speed": 0,
         "speedAccuracyMetersPerSecond": {
-          "value": 0.0
+          "nullReason": "ANDROID_SDK_TOO_OLD"
         },
-        "time": 1574675417145,
+        "time": 1574713372000,
         "verticalAccuracyMeters": {
-          "value": 2.0
+          "nullReason": "ANDROID_SDK_TOO_OLD"
         },
         "isFromMockProvider": false,
         "address": {
-          "value": "332 Corona Ave. Owings Mills, MD 21117"
+          "value": "No. 4-1, Alley 8, Lane 106, Section 4, Bade Road, Songshan District, Taipei City, Taiwan 105"
         }
       }
     },
     "current": {
       "value": {
-        "accuracy": 27.423,
-        "altitude": 42.89999771118164,
-        "bearing": 0.0,
+        "accuracy": 20,
+        "altitude": 0,
+        "bearing": 90,
         "bearingAccuracyDegrees": {
-          "value": 0.0
+          "nullReason": "ANDROID_SDK_TOO_OLD"
         },
-        "latitude": 25.0723299,
-        "longitude": 121.6090929,
+        "latitude": 25.04718,
+        "longitude": 121.5609533,
         "provider": "fused",
-        "speed": 0.0,
+        "speed": 0,
         "speedAccuracyMetersPerSecond": {
-          "value": 0.0
+          "nullReason": "ANDROID_SDK_TOO_OLD"
         },
-        "time": 1574675438665,
+        "time": 1574713711000,
         "verticalAccuracyMeters": {
-          "value": 2.0
+          "nullReason": "ANDROID_SDK_TOO_OLD"
         },
         "isFromMockProvider": false,
         "address": {
-          "value": "332 Corona Ave. Owings Mills, MD 21117"
+          "value": "No. 4-1, Alley 8, Lane 106, Section 4, Bade Road, Songshan District, Taipei City, Taiwan 105"
         }
       }
     }
@@ -129,84 +136,93 @@ dependencies {
     "accelerometer": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "nullReason": "NO_UPDATE_RECEIVED_DURING_SNAP"
         },
         "value": [
-          -0.062270835,
-          0.08622004,
-          9.853057
+          -6.79493E-6,
+          7.645264,
+          6.1470146
         ]
       }
     },
     "accelerometerUncalibrated": {
-      "nullReason": "UNSUPPORTED"
+      "nullReason": "ANDROID_SDK_TOO_OLD"
     },
     "ambientTemperature": {
-      "nullReason": "UNSUPPORTED"
+      "value": {
+        "accuracy": {
+          "value": 3
+        },
+        "value": [
+          0,
+          0,
+          0
+        ]
+      }
     },
     "gameRotationVector": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          0.0039436733,
-          0.0055385535,
-          -0.0063705374,
-          0.9999588
+          0.31441018,
+          -0.29631326,
+          -0.61855906,
+          0.65630126
         ]
       }
     },
     "geomagneticRotationVector": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          -0.0021281645,
-          0.006246302,
-          0.82789326,
-          0.5608482,
-          0.0
+          0.42428592,
+          0.081714615,
+          0.17055161,
+          0.88555914,
+          0
         ]
       }
     },
     "gravity": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "nullReason": "NO_UPDATE_RECEIVED_DURING_SNAP"
         },
         "value": [
-          -0.10837596,
-          0.07830476,
-          9.805722
+          -2.022448E-4,
+          7.641998,
+          6.1457424
         ]
       }
     },
     "gyroscope": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "nullReason": "NO_UPDATE_RECEIVED_DURING_SNAP"
         },
         "value": [
-          0.004490194,
-          0.0032647678,
-          -0.0012041504
+          0,
+          0,
+          0
         ]
       }
     },
     "gyroscopeUncalibrated": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          0.0034249069,
-          0.0021995283,
-          0.006785356,
-          0.0,
-          0.0,
-          0.0
+          0,
+          0,
+          0,
+          4.2E-45,
+          0,
+          0
         ]
       }
     },
@@ -219,56 +235,44 @@ dependencies {
     "light": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          117.60282,
-          0.0,
-          0.0
+          0,
+          0,
+          0
         ]
       }
     },
     "linearAcceleration": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "nullReason": "NO_UPDATE_RECEIVED_DURING_SNAP"
         },
         "value": [
-          0.03047655,
-          -0.03117207,
-          0.0052615167
+          1.9544976E-4,
+          0.0032572746,
+          0.0012874603
         ]
       }
     },
     "lowLatencyOffbodyDetect": {
-      "nullReason": "UNSUPPORTED"
+      "nullReason": "ANDROID_SDK_TOO_OLD"
     },
     "magneticField": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          16.547108,
-          -5.8184834,
-          -18.761345
+          17.976254,
+          32.75646,
+          -31.324705
         ]
       }
     },
     "magneticFieldUncalibrated": {
-      "value": {
-        "accuracy": {
-          "value": 3.0
-        },
-        "value": [
-          62.541004,
-          -3.3567228,
-          39.579853,
-          45.993885,
-          2.4617617,
-          58.34127
-        ]
-      }
+      "nullReason": "NO_UPDATE_RECEIVED_DURING_SNAP"
     },
     "motionDetect": {
       "nullReason": "UNSUPPORTED"
@@ -277,48 +281,110 @@ dependencies {
       "nullReason": "UNSUPPORTED"
     },
     "pressure": {
-      "nullReason": "UNSUPPORTED"
+      "value": {
+        "accuracy": {
+          "value": 3
+        },
+        "value": [
+          1013.25,
+          0,
+          0
+        ]
+      }
     },
     "proximity": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          9.0,
-          9.0,
-          0.0
+          1,
+          0,
+          0
         ]
       }
     },
     "relativeHumidity": {
-      "nullReason": "UNSUPPORTED"
+      "value": {
+        "accuracy": {
+          "value": 3
+        },
+        "value": [
+          0,
+          0,
+          0
+        ]
+      }
     },
     "rotationVector": {
       "value": {
         "accuracy": {
-          "value": 3.0
+          "value": 3
         },
         "value": [
-          -0.0024333159,
-          0.0063095144,
-          0.8272192,
-          0.56184274,
-          0.0
+          0.42428592,
+          0.08171464,
+          0.17055163,
+          0.8855592,
+          0
         ]
       }
     },
     "significantMotion": {
-      "nullReason": "NO_CHANGE_DURING_SNAP"
+      "nullReason": "UNSUPPORTED"
     },
     "stationaryDetect": {
       "nullReason": "UNSUPPORTED"
     },
     "stepCounter": {
-      "nullReason": "NO_CHANGE_DURING_SNAP"
+      "nullReason": "UNSUPPORTED"
     },
     "stepDetector": {
-      "nullReason": "NO_CHANGE_DURING_SNAP"
+      "nullReason": "UNSUPPORTED"
+    }
+  },
+  "settingsInfo": {
+    "adbEnabled": {
+      "value": "0"
+    },
+    "airplaneModeOn": {
+      "value": "0"
+    },
+    "airplaneModeRadios": {
+      "value": "cell,bluetooth,wifi,nfc,wimax"
+    },
+    "autoTime": {
+      "value": "1"
+    },
+    "autoTimeZone": {
+      "value": "1"
+    },
+    "bluetoothOn": {
+      "value": "0"
+    },
+    "dataRoaming": {
+      "value": "0"
+    },
+    "developmentSettingsEnabled": {
+      "nullReason": "NOT_FOUND"
+    },
+    "deviceName": {
+      "nullReason": "ANDROID_SDK_TOO_OLD"
+    },
+    "deviceProvisioned": {
+      "value": "1"
+    },
+    "httpProxy": {
+      "nullReason": "NOT_FOUND"
+    },
+    "modeRinger": {
+      "value": "2"
+    },
+    "wifiOn": {
+      "value": "1"
+    },
+    "androidIdHash": {
+      "value": "8045bfaa2dc84358f5464ce7842a207756ddf350859edadf7ebbe7096495934a"
     }
   }
 }

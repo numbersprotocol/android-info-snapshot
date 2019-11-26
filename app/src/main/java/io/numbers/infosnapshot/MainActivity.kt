@@ -3,13 +3,13 @@ package io.numbers.infosnapshot
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import io.numbers.infosnapshot.factories.LocationInfoFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import org.json.JSONObject
+import timber.log.Timber
 
-const val TAG = "InfoSnapshotExampleApp"
 private const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
@@ -32,10 +32,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             job = launch {
                 try {
                     val snapshot = snapshotBuilder.snap()
-                    Log.i(TAG, snapshot.toJson())
-                    Log.i(TAG, "$snapshot")
+                    Timber.i("$snapshot")
+                    Timber.i(JSONObject(snapshot.toJson()).toString(2))
                 } catch (e: Exception) {
-                    Log.e(TAG, Log.getStackTraceString(e))
+                    Timber.e(e)
                 }
             }
         }
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         debugButton.setOnClickListener {
             launch {
                 val locationInfo = LocationInfoFactory.newLocationInfo(this@MainActivity, 10000)
-                Log.i(TAG, "$locationInfo")
+                Timber.i("$locationInfo")
             }
         }
     }
@@ -60,9 +60,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             Manifest.permission.ACCESS_FINE_LOCATION
         )
         if (shouldProvideRationale) {
-            Log.i(TAG, "Displaying permission rationale to provide additional context.")
+            Timber.i("Displaying permission rationale to provide additional context.")
         } else {
-            Log.i(TAG, "Requesting permission")
+            Timber.i("Requesting permission")
             requestPermissions(
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_PERMISSIONS_REQUEST_CODE
@@ -75,18 +75,18 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        Log.i(TAG, "onRequestPermissionResult")
+        Timber.i("onRequestPermissionResult")
 
         if (requestCode != REQUEST_PERMISSIONS_REQUEST_CODE) return
 
         when {
-            grantResults.isEmpty() -> Log.i(TAG, "User interaction was cancelled.")
+            grantResults.isEmpty() -> Timber.i("User interaction was cancelled.")
             grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
-                Log.i(TAG, "Permissions granted.")
+                Timber.i("Permissions granted.")
                 snapButton.isEnabled = true
                 debugButton.isEnabled = true
             }
-            else -> Log.e(TAG, "Permissions denied.")
+            else -> Timber.e("Permissions denied.")
         }
     }
 
