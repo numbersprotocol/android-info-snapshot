@@ -1,6 +1,6 @@
 # Android Information Snapshot
 
-[![](https://jitpack.io/v/numbersprotocol/android-info-snapshot.svg)](https://jitpack.io/#numbersprotocol/android-info-snapshot)
+[![JitPack version](https://jitpack.io/v/numbersprotocol/android-info-snapshot.svg)](https://jitpack.io/#numbersprotocol/android-info-snapshot)
 
 A simple library to capture information of an Android smartphone at a certain time.
 
