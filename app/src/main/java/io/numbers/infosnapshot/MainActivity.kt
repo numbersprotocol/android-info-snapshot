@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             val snapshotBuilder = InfoSnapshotBuilder(this).apply {
                 duration = 2000
             }
-            job = launch {
+            job = launch(Dispatchers.IO) {
                 try {
                     val snapshot = snapshotBuilder.snap()
                     Timber.i("$snapshot")

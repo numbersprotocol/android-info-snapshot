@@ -2,6 +2,7 @@ package io.numbers.infosnapshot.factories
 
 import android.content.Context
 import android.location.Location
+import android.os.Looper
 import android.util.Log
 import com.google.android.gms.location.*
 import io.numbers.infosnapshot.model.info.LocationData
@@ -32,7 +33,7 @@ object LocationInfoFactory {
         val currentLocations = mutableListOf<LocationData>()
         val locationCallback = createLocationCallback(context, currentLocations)
         try {
-            client.requestLocationUpdates(locationRequest, locationCallback, null)
+            client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
             delay(duration)
         } finally {
             client.removeLocationUpdates(locationCallback)
