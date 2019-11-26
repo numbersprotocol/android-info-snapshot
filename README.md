@@ -1,5 +1,7 @@
 # Android Information Snapshot
 
+[![](https://jitpack.io/v/numbersprotocol/android-info-snapshot.svg)](https://jitpack.io/#numbersprotocol/android-info-snapshot)
+
 A simple library to capture information of an Android smartphone at a certain time.
 
 ## Usage
@@ -44,7 +46,7 @@ Add the dependency.
 
 ``` gradle
 dependencies {
-  implementation "com.github.numbersprotocol:android-info-snapshot:0.2.0"
+  implementation "com.github.numbersprotocol:android-info-snapshot:[release-version]"
 }
 ```
 
