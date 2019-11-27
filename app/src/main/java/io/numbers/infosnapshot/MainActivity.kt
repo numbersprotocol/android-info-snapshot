@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.numbers.infosnapshot.factories.LocationInfoFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import org.json.JSONObject
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         if (checkPermissions()) {
             snapButton.isEnabled = true
-            debugButton.isEnabled = true
         } else requestPermissions()
 
         snapButton.setOnClickListener {
@@ -41,13 +39,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         cancelButton.setOnClickListener { job?.cancel() }
-
-        debugButton.setOnClickListener {
-            launch {
-                val locationInfo = LocationInfoFactory.newLocationInfo(this@MainActivity, 10000)
-                Timber.i("$locationInfo")
-            }
-        }
     }
 
     private fun checkPermissions(): Boolean {
@@ -84,7 +75,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
                 Timber.i("Permissions granted.")
                 snapButton.isEnabled = true
-                debugButton.isEnabled = true
             }
             else -> Timber.e("Permissions denied.")
         }

@@ -19,13 +19,6 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel" />
 
-    <Button
-        android:id="@+id/debugButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/debug" />
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
