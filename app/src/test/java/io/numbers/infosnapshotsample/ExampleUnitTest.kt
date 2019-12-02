@@ -1,4 +1,4 @@
-package io.numbers.infosnapshot
+package io.numbers.infosnapshotsample
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,4 +1,4 @@
-package io.numbers.infosnapshot
+package io.numbers.infosnapshotsample
 
 import android.app.Application
 import timber.log.Timber

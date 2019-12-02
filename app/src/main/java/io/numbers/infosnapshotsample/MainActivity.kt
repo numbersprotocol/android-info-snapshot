@@ -1,9 +1,10 @@
-package io.numbers.infosnapshot
+package io.numbers.infosnapshotsample
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import io.numbers.infosnapshot.InfoSnapshotBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import org.json.JSONObject
