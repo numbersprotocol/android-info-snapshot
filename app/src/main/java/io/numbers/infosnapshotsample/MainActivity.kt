@@ -4,17 +4,23 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.numbers.infosnapshot.InfoSnapshotBuilder
+import androidx.lifecycle.lifecycleScope
+import io.numbers.infosnapshot.model.Snapshot
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import timber.log.Timber
 
 private const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
 
-class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+class MainActivity : AppCompatActivity() {
 
     private var job: Job? = null
+    private var dataClassText: String? = null
+    private var json: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +30,38 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             snapButton.isEnabled = true
         } else requestPermissions()
 
-        snapButton.setOnClickListener {
-            val snapshotBuilder = InfoSnapshotBuilder(this).apply {
-                duration = 2000
+        snapButton.setOnClickListener { snap() }
+
+        cancelButton.setOnClickListener {
+            job?.cancel()
+            progressBar.isIndeterminate = false
+        }
+    }
+
+    private fun snap() {
+        val snapshotBuilder = Snapshot.Builder(this).apply {
+            duration = 5000
+        }
+        progressBar.isIndeterminate = true
+        job = lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val snapshot = snapshotBuilder.snap()
+                dataClassText = "$snapshot"
+                Timber.i("$snapshot")
+                json = JSONObject(snapshot.toJson()).toString(2)
+                Timber.i(json)
+            } catch (e: Exception) {
+                Timber.e(e)
+                dataClassText = e.toString()
+                json = e.toString()
             }
-            job = launch(Dispatchers.IO) {
-                try {
-                    val snapshot = snapshotBuilder.snap()
-                    Timber.i("$snapshot")
-                    Timber.i(JSONObject(snapshot.toJson()).toString(2))
-                } catch (e: Exception) {
-                    Timber.e(e)
-                }
+
+            withContext(Dispatchers.Main) {
+                dataClassTextView.text = dataClassText
+                jsonTextView.text = json
+                progressBar.isIndeterminate = false
             }
         }
-
-        cancelButton.setOnClickListener { job?.cancel() }
     }
 
     private fun checkPermissions(): Boolean {
@@ -79,11 +101,5 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             }
             else -> Timber.e("Permissions denied.")
         }
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cancel()
     }
 }

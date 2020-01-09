@@ -3,4 +3,7 @@
     <string name="snap">Snap</string>
     <string name="cancel">Cancel</string>
     <string name="debug">Debug</string>
+    <string name="fromjson">fromJson</string>
+    <string name="json">Json</string>
+    <string name="data_class">Data Class</string>
 </resources>

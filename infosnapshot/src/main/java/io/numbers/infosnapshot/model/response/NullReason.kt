@@ -1,4 +1,4 @@
-package io.numbers.infosnapshot.utils
+package io.numbers.infosnapshot.model.response
 
 enum class NullReason {
     UNKNOWN,

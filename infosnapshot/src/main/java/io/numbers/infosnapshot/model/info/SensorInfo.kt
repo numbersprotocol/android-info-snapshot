@@ -1,39 +1,39 @@
 package io.numbers.infosnapshot.model.info
 
 import com.squareup.moshi.JsonClass
-import io.numbers.infosnapshot.utils.NullableWithReason
+import io.numbers.infosnapshot.model.response.Response
 
 @JsonClass(generateAdapter = true)
 data class SensorInfo(
-    val accelerometer: NullableWithReason<SensorData>,
-    val accelerometerUncalibrated: NullableWithReason<SensorData>,
-    val ambientTemperature: NullableWithReason<SensorData>,
-    val gameRotationVector: NullableWithReason<SensorData>,
-    val geomagneticRotationVector: NullableWithReason<SensorData>,
-    val gravity: NullableWithReason<SensorData>,
-    val gyroscope: NullableWithReason<SensorData>,
-    val gyroscopeUncalibrated: NullableWithReason<SensorData>,
-    val heartBeat: NullableWithReason<SensorData>,
-    val heartRate: NullableWithReason<SensorData>,
-    val light: NullableWithReason<SensorData>,
-    val linearAcceleration: NullableWithReason<SensorData>,
-    val lowLatencyOffbodyDetect: NullableWithReason<SensorData>,
-    val magneticField: NullableWithReason<SensorData>,
-    val magneticFieldUncalibrated: NullableWithReason<SensorData>,
-    val motionDetect: NullableWithReason<SensorData>,
-    val pose6Dof: NullableWithReason<SensorData>,
-    val pressure: NullableWithReason<SensorData>,
-    val proximity: NullableWithReason<SensorData>,
-    val relativeHumidity: NullableWithReason<SensorData>,
-    val rotationVector: NullableWithReason<SensorData>,
-    val significantMotion: NullableWithReason<SensorData>,
-    val stationaryDetect: NullableWithReason<SensorData>,
-    val stepCounter: NullableWithReason<SensorData>,
-    val stepDetector: NullableWithReason<SensorData>
+    val accelerometer: Response,
+    val accelerometerUncalibrated: Response,
+    val ambientTemperature: Response,
+    val gameRotationVector: Response,
+    val geomagneticRotationVector: Response,
+    val gravity: Response,
+    val gyroscope: Response,
+    val gyroscopeUncalibrated: Response,
+    val heartBeat: Response,
+    val heartRate: Response,
+    val light: Response,
+    val linearAcceleration: Response,
+    val lowLatencyOffbodyDetect: Response,
+    val magneticField: Response,
+    val magneticFieldUncalibrated: Response,
+    val motionDetect: Response,
+    val pose6Dof: Response,
+    val pressure: Response,
+    val proximity: Response,
+    val relativeHumidity: Response,
+    val rotationVector: Response,
+    val significantMotion: Response,
+    val stationaryDetect: Response,
+    val stepCounter: Response,
+    val stepDetector: Response
 )
 
 @JsonClass(generateAdapter = true)
 data class SensorData(
-    val accuracy: NullableWithReason<Double>,
+    val accuracy: Response,
     val value: List<Float>
 )

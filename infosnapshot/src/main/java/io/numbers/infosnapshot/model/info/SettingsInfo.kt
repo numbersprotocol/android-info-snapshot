@@ -1,22 +1,22 @@
 package io.numbers.infosnapshot.model.info
 
 import com.squareup.moshi.JsonClass
-import io.numbers.infosnapshot.utils.NullableWithReason
+import io.numbers.infosnapshot.model.response.Response
 
 @JsonClass(generateAdapter = true)
 data class SettingsInfo(
-    val adbEnabled: NullableWithReason<String>,
-    val airplaneModeOn: NullableWithReason<String>,
-    val airplaneModeRadios: NullableWithReason<String>,
-    val autoTime: NullableWithReason<String>,
-    val autoTimeZone: NullableWithReason<String>,
-    val bluetoothOn: NullableWithReason<String>,
-    val dataRoaming: NullableWithReason<String>,
-    val developmentSettingsEnabled: NullableWithReason<String>,
-    val deviceName: NullableWithReason<String>,
-    val deviceProvisioned: NullableWithReason<String>,
-    val httpProxy: NullableWithReason<String>,
-    val modeRinger: NullableWithReason<String>,
-    val wifiOn: NullableWithReason<String>,
-    val androidIdHash: NullableWithReason<String>
+    val adbEnabled: Response,
+    val airplaneModeOn: Response,
+    val airplaneModeRadios: Response,
+    val autoTime: Response,
+    val autoTimeZone: Response,
+    val bluetoothOn: Response,
+    val dataRoaming: Response,
+    val developmentSettingsEnabled: Response,
+    val deviceName: Response,
+    val deviceProvisioned: Response,
+    val httpProxy: Response,
+    val modeRinger: Response,
+    val wifiOn: Response,
+    val androidIdHash: Response
 )

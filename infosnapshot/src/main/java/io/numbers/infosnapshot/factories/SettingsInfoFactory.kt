@@ -4,9 +4,9 @@ import android.content.Context
 import android.os.Build
 import android.provider.Settings
 import io.numbers.infosnapshot.model.info.SettingsInfo
+import io.numbers.infosnapshot.model.response.NullReason
+import io.numbers.infosnapshot.model.response.Response
 import io.numbers.infosnapshot.utils.HashUtils
-import io.numbers.infosnapshot.utils.NullReason
-import io.numbers.infosnapshot.utils.NullableWithReason
 
 object SettingsInfoFactory {
 
@@ -24,7 +24,7 @@ object SettingsInfoFactory {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 getNullableGlobalSettingString(context, Settings.Global.DEVICE_NAME)
-            } else NullableWithReason(NullReason.ANDROID_SDK_TOO_OLD),
+            } else Response.Null(NullReason.ANDROID_SDK_TOO_OLD),
 
             getNullableGlobalSettingString(context, Settings.Global.DEVICE_PROVISIONED),
             getNullableGlobalSettingString(context, Settings.Global.HTTP_PROXY),
@@ -36,14 +36,14 @@ object SettingsInfoFactory {
 
     private fun getNullableGlobalSettingString(context: Context, settingName: String) =
         Settings.Global.getString(context.contentResolver, settingName).let {
-            if (it == null) NullableWithReason(NullReason.NOT_FOUND)
-            else NullableWithReason(it)
+            if (it == null) Response.Null(NullReason.NOT_FOUND)
+            else Response.Result(it)
         }
 
     private fun getNullableSecureSettingString(context: Context, settingName: String) =
         Settings.Secure.getString(context.contentResolver, settingName).let {
-            if (it == null) NullableWithReason(NullReason.NOT_FOUND)
-            else NullableWithReason(HashUtils.sha256(it))
+            if (it == null) Response.Null(NullReason.NOT_FOUND)
+            else Response.Result(HashUtils.sha256(it))
         }
 
 }
