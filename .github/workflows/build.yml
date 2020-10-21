@@ -1,0 +1,54 @@
+name: build
+on: [push, pull_request]
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Lint
+        run: ./gradlew app:lintDebug
+
+      - name: Unit Test
+        run: ./gradlew app:testDebugUnitTest
+
+      - name: Build APK
+        run: ./gradlew app:assembleDebug
+
+      - name: Upload reports to artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: app reports
+          path: ./app/build/reports/
+  infosnapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Lint
+        run: ./gradlew infosnapshot:lintDebug
+
+      - name: Unit Test
+        run: ./gradlew infosnapshot:testDebugUnitTest
+
+      - name: Build APK
+        run: ./gradlew infosnapshot:assembleDebug
+
+      - name: Upload reports to artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: infosnapshot reports
+          path: ./infosnapshot/build/reports/
