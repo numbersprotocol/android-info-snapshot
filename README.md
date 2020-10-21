@@ -1,5 +1,6 @@
 # Android Information Snapshot
 
+[![build](https://github.com/numbersprotocol/android-info-snapshot/workflows/build/badge.svg)](https://github.com/numbersprotocol/android-info-snapshot/actions?query=workflow%3Abuild)
 [![JitPack version](https://jitpack.io/v/numbersprotocol/android-info-snapshot.svg)](https://jitpack.io/#numbersprotocol/android-info-snapshot)
 
 A simple library to capture information of an Android smartphone at a certain time.
