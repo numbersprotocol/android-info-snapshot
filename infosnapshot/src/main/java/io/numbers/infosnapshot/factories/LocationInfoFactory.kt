@@ -1,5 +1,6 @@
 package io.numbers.infosnapshot.factories
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Looper
@@ -15,6 +16,7 @@ import kotlinx.coroutines.delay
 
 object LocationInfoFactory {
 
+    @SuppressLint("MissingPermission")
     suspend fun newLocationInfo(context: Context, duration: Long) = coroutineScope {
         val client = LocationServices.getFusedLocationProviderClient(context)
         val locationRequest = createLocationRequest(duration)

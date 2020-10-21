@@ -14,7 +14,7 @@ class ResponseAdapter {
     }
 
     @FromJson
-    fun fromJson(json: Any): Response {
+    fun fromJson(@Suppress("UNUSED_PARAMETER") json: Any): Response {
         throw NotImplementedError("Currently, we do NOT support parsing from JSON.")
     }
 }
