@@ -220,7 +220,7 @@ object SensorInfoFactory {
     ) {
 
         fun average(): Response {
-            return values.map { it.size }.max()?.let { maxValueSize ->
+            return values.map { it.size }.maxOrNull()?.let { maxValueSize ->
                 val sumOfValue = FloatArray(maxValueSize)
 
                 values.forEach {
