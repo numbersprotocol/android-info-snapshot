@@ -27,6 +27,7 @@ jobs:
         with:
           name: app reports
           path: ./app/build/reports/
+
   infosnapshot:
     runs-on: ubuntu-latest
     steps:

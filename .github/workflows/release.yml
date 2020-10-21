@@ -1,0 +1,75 @@
+name: release
+on: workflow_dispatch
+
+jobs:
+  github-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+
+      - name: Set up JDK
+        if: steps.extract_branch.outputs.branch == 'master'
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Test and build library and example app
+        if: steps.extract_branch.outputs.branch == 'master'
+        run: |
+          ./gradlew lintDebug
+          ./gradlew assembleDebug
+
+      - name: Extract library version
+        id: extract_version
+        if: steps.extract_branch.outputs.branch == 'master'
+        run: |
+          echo "::set-output name=versionCode::$(./gradlew -q :infosnapshot:printVersionCode)"
+          echo "::set-output name=versionName::$(./gradlew -q :infosnapshot:printVersionName)"
+
+      - name: Create GitHub QA prerelease
+        id: create_release
+        if: steps.extract_branch.outputs.branch == 'master'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.extract_version.outputs.versionName }}
+          release_name: ${{ steps.extract_version.outputs.versionName }}
+          body: Thanks for following along! For more information check out the [CHANGELOG](https://github.com/numbersprotocol/android-info-snapshot/blob/master/CHANGELOG.md).
+
+      - name: Upload example APK to release assets
+        if: steps.extract_branch.outputs.branch == 'master'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./app/build/outputs/apk/debug/app-debug.apk
+          asset_name: app-debug.apk
+          asset_content_type: application/vnd.android.package-archive
+
+      - name: Upload metadata.json to release assets
+        if: steps.extract_branch.outputs.branch == 'master'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./app/build/outputs/apk/debug/output-metadata.json
+          asset_name: output-metadata.json
+          asset_content_type: application/json
+
+      - name: Upload library AAR to release assets
+        if: steps.extract_branch.outputs.branch == 'master'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./infosnapshot/build/outputs/aar/infosnapshot-debug.aar
+          asset_name: infosnapshot-debug.aar
+          asset_content_type: application/octet-stream
